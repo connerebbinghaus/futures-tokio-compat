@@ -1,8 +1,8 @@
 use crate::LocalFrom;
 use log::warn;
 
-impl LocalFrom<tokio_executor::SpawnError> for futures_core::task::SpawnError {
-    fn from(err: tokio_executor::SpawnError) -> Self {
+impl LocalFrom<tokio::executor::SpawnError> for futures_core::task::SpawnError {
+    fn from(err: tokio::executor::SpawnError) -> Self {
         if err.is_shutdown() {
             Self::shutdown()
         } else {
@@ -12,7 +12,7 @@ impl LocalFrom<tokio_executor::SpawnError> for futures_core::task::SpawnError {
     }
 }
 
-impl LocalFrom<futures_core::task::SpawnError> for tokio_executor::SpawnError {
+impl LocalFrom<futures_core::task::SpawnError> for tokio::executor::SpawnError {
     fn from(err: futures_core::task::SpawnError) -> Self {
         if err.is_shutdown() {
             Self::shutdown()
